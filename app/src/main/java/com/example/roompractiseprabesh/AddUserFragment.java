@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 public class AddUserFragment extends Fragment {
@@ -32,6 +33,18 @@ public class AddUserFragment extends Fragment {
                 int userid=Integer.parseInt(id.getText().toString());
                 String username=name.getText().toString();
                 String useremail=email.getText().toString();
+
+                User user=new User();
+                user.setId(userid);
+                user.setEmail(useremail);
+                user.setName(username);
+
+                MainActivity.myAppDatabase.myDao().addUser(user);
+                Toast.makeText(getActivity(),"User Added Successfully",Toast.LENGTH_SHORT).show();
+
+                id.setText("");
+                name.setText("");
+                email.setText("");
             }
         });
         return  v;
