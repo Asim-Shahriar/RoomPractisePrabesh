@@ -12,7 +12,7 @@ import android.widget.Button;
 
 public class HomeFragment extends Fragment implements View.OnClickListener{
 
-    private Button addbtn,btnreadUsers;
+    private Button addbtn,btnreadUsers,btndelete,btnUpdate;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -20,8 +20,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
         View v= inflater.inflate(R.layout.fragment_home, container, false);
         addbtn=v.findViewById(R.id.btn_add);
         btnreadUsers=v.findViewById(R.id.btn_view_user);
+        btndelete=v.findViewById(R.id.btn_delete);
+        btnUpdate=v.findViewById(R.id.btn_update_user);
+
         btnreadUsers.setOnClickListener(this);
         addbtn.setOnClickListener(this);
+        btndelete.setOnClickListener(this);
+        btnUpdate.setOnClickListener(this);
+
         return v;
     }
 
@@ -35,6 +41,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener{
 
           case R.id.btn_view_user:
               MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container,new ReadUserFragment()).addToBackStack(null)
+                      .commit();
+              break;
+
+          case R.id.btn_delete:
+              MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container,new DeleteUserFragment()).addToBackStack(null)
+                      .commit();
+              break;
+
+          case R.id.btn_update_user:
+              MainActivity.fragmentManager.beginTransaction().replace(R.id.fragment_container,new UpdateFragment()).addToBackStack(null)
                       .commit();
               break;
       }
